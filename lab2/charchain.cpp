@@ -82,7 +82,7 @@ class LinkedChar
             }
         }
         
-        ~LinkedChar() {} 
+        ~LinkedChar() {clear();} 
 
         void printLinkedChar()
         {   
@@ -147,7 +147,7 @@ class LinkedChar
 
             }            
         }
-        
+
         bool subStringMatch(const LinkedChar &lc) const
         {
             Node *stringNode = head;
@@ -179,6 +179,7 @@ class LinkedChar
                 Node *deleteNode = head;
                 head = head->getNext();
                 delete deleteNode;
+                deleteNode = nullptr;
             }      
         }
 

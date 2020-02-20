@@ -183,6 +183,21 @@ class LinkedChar
             return false;
         }
 
+        bool subStringMatch(const LinkedChar &lc) const
+        {
+            Node *stringNode = head;
+            Node *substringNode = lc.head;
+            while(substringNode!=nullptr)
+            {   
+                while(stringNode!=nullptr)
+                {
+                    
+                }
+                
+            }
+            return false;
+        }
+
         void clear()
         {   
             Node *deleteNode;

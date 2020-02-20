@@ -147,52 +147,27 @@ class LinkedChar
 
             }            
         }
-
-        bool submatch(const LinkedChar &lc) const {
-            string word;
-            string substring;
-            Node *currNodeWord = head;
-            Node *currNodeSubstring = lc.head;
-            
-            // Build word from linked list and store in string
-            while(currNodeWord!=nullptr)
-            {   
-                if(currNodeWord!=nullptr)
-                {
-                    word += currNodeWord->getItem();
-                }
-                currNodeWord = currNodeWord->getNext();
-            }
-            
-            // Build subtring from linked char list
-            while(currNodeSubstring!=nullptr)
-            {   
-                substring += currNodeSubstring->getItem();
-                currNodeSubstring = currNodeSubstring->getNext();
-            }   
-
-            // Check if substring exists in word
-            bool exists = word.find(substring);
-            
-            if(exists)
-            {
-                return true;
-            }
-            
-            return false;
-        }
-
+        
         bool subStringMatch(const LinkedChar &lc) const
         {
             Node *stringNode = head;
             Node *subStringNode = lc.head;
-            while(subStringNode!=nullptr)
-            {   
-                while(stringNode!=nullptr)
-                {
+            int count = 0;
+            if(subStringNode!=nullptr){
+              while(stringNode!=nullptr)
+                {   
+                    if(stringNode->getItem()==subStringNode->getItem())
+                    {   
+                        count++;
+                        cout << subStringNode->getItem() << endl;
+                        subStringNode = subStringNode->getNext();
+                        if(subStringNode==nullptr && count==lc.nodeCount)
+                        {
+                            return true;
+                        }
+                    }
                     stringNode = stringNode->getNext();
                 }
-                subStringNode = subStringNode->getNext();
             }
             return false;
         }
@@ -266,7 +241,13 @@ int main()
                 getline(cin, userInput);
                 LinkedChar someLinkedList2 = LinkedChar(userInput);
                 cout << endl; 
-                // cout << "Substring '" << userInput << "'? " << someLinkedList.submatch(someLinkedList2) << endl;
+                int match = someLinkedList.subStringMatch(someLinkedList2);
+                if (match)
+                {
+                    cout << "Substring " << userInput << "? True" << endl;
+                } else {
+                     cout << "Substring " << userInput << "? False" << endl;
+                }
                 break;                  
         };
     };

@@ -6,11 +6,12 @@ using namespace std;
 class Node {
     private:
         char item;
-        Node * next; 
+        Node* next; 
 
     public:
-        // Constructor
+
         Node() : next(nullptr) {}
+
         Node(char item) : item(item), next(nullptr) {} 
 
         char getItem() const 
@@ -20,7 +21,7 @@ class Node {
 
         void setItem(char someItem)
         {
-            Node::item = someItem;
+            item = someItem;
         }
 
         Node *getNext() const 
@@ -28,100 +29,192 @@ class Node {
             return next;
         }
 
-        void setNext(Node *next){
-            Node::next = next;
+        void setNext(Node *nextNode){
+            next = nextNode;
         }
 };
 
 class LinkedChar
-{
+{   
     private:
-        Node *head;
-        int nodeCount;    
+        Node* head;
 
     public:
-        LinkedChar() : head(nullptr){};
-        LinkedChar(string someString) : head(nullptr)
+        int nodeCount;
+
+        LinkedChar() 
+        { 
+            head = nullptr; 
+            nodeCount=0;
+        }
+
+        LinkedChar(string& someString)
         {   
-            // Node *currNode = head;
-            // currNode = new Node(someString[2]);
-            for(int i=0; i < someString.size(); i++)
-            {   
+            // Create Initial head with first char of string 
+            head = new Node();
+            head->setItem(someString[0]);
+            nodeCount = 1;
+        
+            for(int i=1;i<someString.size();i++)
+            {
                 Node *currNode = head;
+                Node *prevNode;
+
                 while(currNode!=nullptr)
                 {   
+                    prevNode = currNode;
                     currNode = currNode->getNext();
-                }
-                currNode = new Node(someString[i]);
+                } 
+                // Create New Node 
+                currNode = new Node();
+                currNode->setItem(someString[i]);
+                // Set Previous Node Next to Current Node
+                prevNode->setNext(currNode);
                 nodeCount++;
-                cout << i << ": ";
-                cout << currNode->getItem() << endl;
-            };
-        };
-
-        // Returns First Instance of char in linked list
-        int index(char &item) const
+            }
+        }
+        void setNodeCount()
+        {
+            nodeCount++;
+        }
+        void printLinkedChar()
         {   
             Node *currNode = head;
-            // Index Counter
-            int count = 0;
-            // Traverse Node
-            while(currNode!=nullptr && currNode->getItem()!= item)
+            while(currNode!=nullptr)
             {   
+                cout << currNode << ": " << currNode->getItem() << endl;
                 currNode = currNode->getNext();
-                count++;
             }
-            if(currNode->getItem()==item){
-                return count++;
+        }
+
+        int index(char &item)
+        {   
+            Node *currNode = head;
+            int count=0;
+
+            while(currNode!=nullptr && currNode->getItem()!=item)
+            {
+                count++;
+                currNode = currNode->getNext();
+            }
+            if(currNode!=nullptr)
+            {
+                return count;
             }
             return -1;
         }
 
-        // Returns length of linked list
-        int length()
-        {   
-            // Doesnt count break 
-            return nodeCount-1;
-        }
-        
-        void append(const LinkedChar &lc)
-        {
-            cout << "Test0" << endl;
+        int length(){
+            return nodeCount;
         }
 
-        bool submatch(const LinkedChar &lc) const
-        {
-            return true;
+        void append(const LinkedChar &lc) {
+            Node *currNode = head;
+            Node *prevNode;
+
+            while(currNode!=nullptr)
+            {   
+                prevNode = currNode;
+                currNode = currNode->getNext();
+            }   
+
+            if(lc.head!=nullptr)
+            {   
+                // Add LC head to Tail of Linked List
+                currNode = new Node(lc.head->getItem());
+                prevNode->setNext(currNode);       
+                nodeCount++;
+
+                // Traverse LC Linked List and Add to This Linked List
+                Node *currNodeLc = lc.head->getNext();
+                Node *prevNodeLc;
+                while(currNodeLc!=nullptr)
+                {   
+                    prevNode = currNode;
+                    currNode = new Node(currNodeLc->getItem());
+                    prevNode->setNext(currNode);
+                    nodeCount++;
+                    prevNodeLc = currNodeLc;
+                    currNodeLc = currNodeLc->getNext();
+                }
+
+            }            
         }
 
+        bool submatch(const LinkedChar &lc) const {
+            return false;
+        }
 
         void clear()
         {   
-            Node *currNode = head;
-            while(currNode !=nullptr)
-            {
-                Node *deleteNode = currNode;
-                currNode = currNode->getNext();
+            Node *deleteNode;
+            while(head!=nullptr) {
+                Node *deleteNode = head;
+                head = head->getNext();
                 delete deleteNode;
-            }
+            }      
         }
 
-        ~LinkedChar()
-        {
-            clear();
-        }
+        // Destructor Method Clear Memory for Each Node if Exists
+        ~LinkedChar() {
+        } 
 
 };
 
+
 int main()
 {   
-    string someString = "hello";
+    
+    int userChoice;
+    LinkedChar someLinkedList;
+    LinkedChar someLinkedList2;
+    string userInput;
 
+    do {   
+        cout << "Enter a Choice:" << endl;
+        cout << "1. Enter New String" << endl;
+        cout << "2. Enter New String" << endl;
+        cout << "3. Enter New String" << endl;
+        cout << "4. Enter New String" << endl;
+        cout << "5. Enter New String" << endl;
+        cout << "6. Exit " << endl;
+        cin >> userChoice;
+        
+        switch(userChoice){
+            case 1: 
+                
+                cout << "Enter a String and Create a Linked Character List: ";
+                cin >> userInput;
+                someLinkedList = LinkedChar(userInput);
+                break;
+            case 2: 
+                cout << "Printing the length of Linked Character List: " << someLinkedList.length() << endl;
+                break;
+            default:
+                cout << "Enter a valid response!" << endl;
+                break;            
+        };
+    } while(userChoice!=6);
+
+
+    string someString = "hello";
+    string someString2 = "world";
+    char someChar = 'l';
     // Initialize Linked List and Pass in String
     LinkedChar someChars;
-    someChars = LinkedChar(someString);
-    // Get Length of Linked List
-    cout << someChars.length() << endl;
-    someChars.~LinkedChar();
+    someChars = LinkedChar(someString); 
+    cout << "Current Node count: " << someChars.length() << endl;
+    // Append Some Linked Char to Another
+    someChars.append(someString2);
+    cout << "New Node count after append: " << someChars.length() << endl;
+    // Print LinkedChars
+    someChars.printLinkedChar();
+    cout << "Matching letter is index: " << someChars.index(someChar) << endl;
+    // Get Index of a matching char in Linked List
+    
+    cout << "Clearing Memory: " << endl;
+    someChars.clear();
+    cout << "Done!" << endl;
+    return 0;
 
 }

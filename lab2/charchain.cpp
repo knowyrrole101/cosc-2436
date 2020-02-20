@@ -182,16 +182,16 @@ int main()
         
         switch(userChoice){
             case 1: 
-                
                 cout << "Enter a String and Create a Linked Character List: ";
-                cin >> userInput;
+                getline(cin, userInput);
                 someLinkedList = LinkedChar(userInput);
                 break;
             case 2: 
                 cout << "Printing the length of Linked Character List: " << someLinkedList.length() << endl;
                 break;
             default:
-                cout << "Enter a valid response!" << endl;
+                cout << "Find the index of a character in linked list if exists: " << endl;
+                cin >> userInput;
                 break;            
         };
     } while(userChoice!=6);

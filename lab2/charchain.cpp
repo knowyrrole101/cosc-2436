@@ -179,7 +179,6 @@ class LinkedChar
                 Node *deleteNode = head;
                 head = head->getNext();
                 delete deleteNode;
-                
             }      
         }
 

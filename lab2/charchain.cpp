@@ -253,27 +253,6 @@ int main()
         };
     };
 
-
-    // string someString = "hello";
-    // string someString2 = "world";
-    // char someChar = 'l';
-    // // Initialize Linked List and Pass in String
-    // LinkedChar someChars = LinkedChar(someString); 
-    // // std::cout << "Current Node count: " << someChars.length() << endl;
-    // // Append Some Linked Char to Another
-    // someChars.append(someString2);
-    // // std::cout << "New Node count after append: " << someChars.length() << endl;
-    // // Print LinkedChars
-    // // someChars.printLinkedChar();
-    // // std::cout << "Matching letter is index: " << someChars.index(someChar) << endl;
-    
-    // string someString3 = "farl";
-    // LinkedChar someChars2 = LinkedChar(someString3);
-    // cout << "Is a substring? " << someChars.submatch(someChars2) << endl;
-    // // Get Index of a matching char in Linked List
-    // // std::cout << "Clearing Memory: " << endl;
-    // // someChars.clear();
-    // // std::cout << "Done!" << endl;
     return 0;
 
 }

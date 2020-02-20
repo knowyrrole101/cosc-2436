@@ -167,16 +167,15 @@ int main()
     
     int userChoice;
     LinkedChar someLinkedList;
-    LinkedChar someLinkedList2;
     string userInput;
 
     do {   
         cout << "Enter a Choice:" << endl;
         cout << "1. Enter New String" << endl;
-        cout << "2. Enter New String" << endl;
-        cout << "3. Enter New String" << endl;
-        cout << "4. Enter New String" << endl;
-        cout << "5. Enter New String" << endl;
+        cout << "2. Get Length of Linked List" << endl;
+        cout << "3. Find Index of Character" << endl;
+        cout << "4. Append New string/Linked List to existing Linked List: " << endl;
+        cout << "5. Check if string is a submatch" << endl;
         cout << "6. Exit " << endl;
         cin >> userChoice;
         
@@ -187,12 +186,12 @@ int main()
                 someLinkedList = LinkedChar(userInput);
                 break;
             case 2: 
-                cout << "Printing the length of Linked Character List: " << someLinkedList.length() << endl;
+                cout << "Current Length of Stored Linked Character List: " << someLinkedList.length() << endl;
                 break;
-            default:
-                cout << "Find the index of a character in linked list if exists: " << endl;
-                cin >> userInput;
+            case 3:
+                cout << "Enter the Character you would like the Index of: " << endl;
                 break;            
+
         };
     } while(userChoice!=6);
 

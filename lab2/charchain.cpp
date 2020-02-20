@@ -1,3 +1,11 @@
+/*
+    MAMUN AHMED
+    COSC 2436 - T/TH - LAB 2 
+    LAB 2 - STORED LINKED LIST OF CHARACTERS
+    Output: Program should take in strings and parse into 
+    Linked List of Characters.
+*/
+
 #include <iostream>
 #include <string>
 
@@ -82,7 +90,7 @@ class LinkedChar
             Node *currNode = head;
             while(currNode!=nullptr)
             {   
-                cout << currNode << ": " << currNode->getItem() << endl;
+                std::cout << currNode << ": " << currNode->getItem() << endl;
                 currNode = currNode->getNext();
             }
         }
@@ -167,53 +175,74 @@ int main()
     
     int userChoice;
     LinkedChar someLinkedList;
+    char userCharInput;
     string userInput;
 
-    do {   
-        cout << "Enter a Choice:" << endl;
-        cout << "1. Enter New String" << endl;
-        cout << "2. Get Length of Linked List" << endl;
-        cout << "3. Find Index of Character" << endl;
-        cout << "4. Append New string/Linked List to existing Linked List: " << endl;
-        cout << "5. Check if string is a submatch" << endl;
-        cout << "6. Exit " << endl;
-        cin >> userChoice;
+    while(userChoice!=7)
+    {   
+        std::cout << "Enter a Choice:" << endl;
+        std::cout << "1. Enter New String" << endl;
+        std::cout << "2. Print the Linked Char List w/memory address" << endl; 
+        std::cout << "3. Get Length of Linked List" << endl;
+        std::cout << "4. Find Index of Character" << endl;
+        std::cout << "5. Append New string/Linked List to existing Linked List: " << endl;
+        std::cout << "6. Check if string is a submatch" << endl;
+        std::cout << "7. Exit " << endl;
+        std::cin >> userChoice;      
         
         switch(userChoice){
             case 1: 
-                cout << "Enter a String and Create a Linked Character List: ";
+                std::cout << "Enter a word(s) to create a Linked Character List: ";
+                std::cin.ignore();
                 getline(cin, userInput);
                 someLinkedList = LinkedChar(userInput);
+                std::cout << "You entered the word " << userInput << endl; 
                 break;
-            case 2: 
-                cout << "Current Length of Stored Linked Character List: " << someLinkedList.length() << endl;
+            case 2:
+                someLinkedList.printLinkedChar();
                 break;
-            case 3:
-                cout << "Enter the Character you would like the Index of: " << endl;
-                break;            
-
+            case 3: 
+                std::cout << "Current Length of Stored Linked Character List: " << someLinkedList.length() << endl;
+                break;
+            case 4:
+                std::cout << "Enter the Character you would like the Index of: ";
+                std::cin >> userCharInput;
+                std::cout << "The index of char " << "'" << userCharInput << "'" << ": " << someLinkedList.index(userCharInput) << endl;
+                break;
+            case 5:
+                std::cout << "Append New Linked Char List to Current Linked Char List: ";
+                std::cin.ignore();
+                getline(cin, userInput);
+                someLinkedList.append(userInput);
+                std::cout << endl;
+                std::cout << "The Linked Char list is now: "; 
+                someLinkedList.printLinkedChar();
+                std::cout << endl;
+                break;        
+            case 6:
+                std::cout << "Check if Linked Char passed in is a submatch of existing Linked Char List: ";
+                break;                  
         };
-    } while(userChoice!=6);
+    };
 
 
-    string someString = "hello";
-    string someString2 = "world";
-    char someChar = 'l';
-    // Initialize Linked List and Pass in String
-    LinkedChar someChars;
-    someChars = LinkedChar(someString); 
-    cout << "Current Node count: " << someChars.length() << endl;
-    // Append Some Linked Char to Another
-    someChars.append(someString2);
-    cout << "New Node count after append: " << someChars.length() << endl;
-    // Print LinkedChars
-    someChars.printLinkedChar();
-    cout << "Matching letter is index: " << someChars.index(someChar) << endl;
-    // Get Index of a matching char in Linked List
-    
-    cout << "Clearing Memory: " << endl;
-    someChars.clear();
-    cout << "Done!" << endl;
-    return 0;
+    // string someString = "hello";
+    // string someString2 = "world";
+    // char someChar = 'l';
+    // // Initialize Linked List and Pass in String
+    // LinkedChar someChars;
+    // someChars = LinkedChar(someString); 
+    // std::cout << "Current Node count: " << someChars.length() << endl;
+    // // Append Some Linked Char to Another
+    // someChars.append(someString2);
+    // std::cout << "New Node count after append: " << someChars.length() << endl;
+    // // Print LinkedChars
+    // someChars.printLinkedChar();
+    // std::cout << "Matching letter is index: " << someChars.index(someChar) << endl;
+    // // Get Index of a matching char in Linked List
+    // std::cout << "Clearing Memory: " << endl;
+    // someChars.clear();
+    // std::cout << "Done!" << endl;
+    // return 0;
 
 }

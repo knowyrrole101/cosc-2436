@@ -82,7 +82,7 @@ class LinkedChar
             }
         }
         
-        ~LinkedChar() {clear();} 
+        ~LinkedChar() {} 
 
         void printLinkedChar()
         {   
@@ -179,6 +179,7 @@ class LinkedChar
                 Node *deleteNode = head;
                 head = head->getNext();
                 delete deleteNode;
+                deleteNode = nullptr;
             }      
         }
 

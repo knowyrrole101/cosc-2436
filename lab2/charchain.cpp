@@ -22,6 +22,8 @@ class Node {
 
         Node(char item) : item(item), next(nullptr) {} 
 
+        ~Node() {};
+
         char getItem() const 
         {
             return item;
@@ -82,7 +84,8 @@ class LinkedChar
             }
         }
         
-        ~LinkedChar() {} 
+        ~LinkedChar() {
+        } 
 
         void printLinkedChar()
         {   
@@ -179,9 +182,9 @@ class LinkedChar
                 Node *deleteNode = head;
                 head = head->getNext();
                 delete deleteNode;
-                deleteNode = nullptr;
-            }      
+            }
         }
+         
 
 };
 
